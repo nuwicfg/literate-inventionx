@@ -4,17 +4,18 @@ const https = require('https');
 const axios = require('axios'); // Easier for multiple jumps in OAuth
 const querystring = require('querystring');
 const crypto = require('crypto');
+const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the current directory (so we can access index.html, etc.)
+// Serve static files from the root directory
 app.use(express.static(__dirname));
 
 // Serve index.html as the root
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // 0. HEALTH CHECK (For frontend verification)
@@ -98,13 +99,11 @@ app.get('/callback', async (req, res) => {
         });
 
         // Redirect back to our dashboard with the user data
-        // For security, we'd normally use a session, but for this demo, we'll pass via query
         const userData = userResponse.data.data.user;
         const encodedData = Buffer.from(JSON.stringify(userData)).toString('base64');
         
         // Redirect to the dashboard using the production URL (or relative path)
         res.redirect(`/dashboard.html?auth=success&token=${accessToken}&data=${encodedData}`); 
-        // Note: Change 5500 if using a different port for your HTML live server
     } catch (error) {
         console.error('Auth Error Details:', {
             message: error.message,
@@ -227,10 +226,16 @@ app.get('/api/user/:username', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`\n🚀 CREATOR AI SERVER RUNNING`);
-    console.log(`✅ Mode: Production`);
-    console.log(`✅ Redirect URI: ${REDIRECT_URI}`);
-    console.log(`🔗 Accessible at: ${PRODUCTION_URL}\n`);
-});
+// Export the app for Vercel
+module.exports = app;
+
+// Only listen if run directly (local development)
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`\n🚀 CREATOR AI SERVER RUNNING`);
+        console.log(`✅ Mode: Development (Local)`);
+        console.log(`✅ Redirect URI: ${REDIRECT_URI}`);
+        console.log(`🔗 Accessible at: http://localhost:${PORT}\n`);
+    });
+}
