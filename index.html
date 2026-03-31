@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorAI - Scaling TikTok with Artificial Intelligence</title>
+    <!-- Google Fonts: Clash Display, Inter -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="dark-theme landing-body">
+
+    <!-- Connection Warning -->
+    <div id="connection-warning" class="connection-warning">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        TikTok connection required to access AI features. <span onclick="window.location.href='login.html'">Connect Now</span>
+    </div>
+
+    <!-- Background Decoration -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="landing-nav">
+        <div class="logo-text large">Creator<span class="text-accent">AI</span></div>
+        <div class="nav-cta">
+            <a href="login.html" class="btn btn-outline btn-small">Sign In</a>
+        </div>
+    </nav>
+
+    <!-- Hero Content -->
+    <main class="hero-container">
+        <div class="hero-content">
+            <span class="badge viral-badge">#1 AI Tool for TikTok 2026</span>
+            <h1 class="hero-title">Turn Data into <br><span class="text-neon-pink">Viral Growth.</span></h1>
+            <p class="hero-subtitle">The only AI-powered assistant that scans your TikTok metrics to predict exactly when to post and how to hook your audience.</p>
+            
+            <div class="hero-actions">
+                <a href="login.html" class="btn btn-primary login-btn-large">
+                    <i class="fa-brands fa-tiktok"></i> Log in with TikTok (Official)
+                </a>
+                <p class="trust-text"><i class="fa-solid fa-lock"></i> Secure login via Official TikTok API</p>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="floating-card glass-panel">
+                <div class="card-header"><i class="fa-solid fa-bolt text-neon-blue"></i> AI Recommendation</div>
+                <div class="card-body">
+                    <p>"Your last video lost 45% of viewers at 0:03. Use a <strong>visual hook</strong> next time."</p>
+                </div>
+            </div>
+            <div class="hero-chart glass-panel">
+                <div class="chart-mock"><div class="bar bar-1"></div><div class="bar bar-2"></div><div class="bar bar-3"></div></div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .landing-body {
+            overflow-y: auto;
+            background: radial-gradient(circle at top right, #111, #000);
+        }
+        .landing-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 10%;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5% 10%;
+            min-height: 80vh;
+        }
+        .hero-content {
+            max-width: 600px;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            letter-spacing: -2px;
+        }
+        .text-neon-pink {
+            color: var(--accent-pink);
+            text-shadow: 0 0 30px var(--glow-spread-pink);
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 500px;
+        }
+        .login-btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.25rem;
+            border-radius: 100px;
+            text-decoration: none;
+        }
+        .trust-text {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.6;
+        }
+        .hero-visual {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+        .floating-card {
+            position: absolute;
+            top: 10%;
+            left: -20%;
+            padding: 1.5rem;
+            width: 250px;
+            animation: float 4s infinite ease-in-out;
+        }
+        .hero-chart {
+            position: absolute;
+            bottom: 10%;
+            right: -10%;
+            padding: 2rem;
+            width: 300px;
+            height: 200px;
+        }
+        .chart-mock {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            height: 100%;
+        }
+        .bar {
+            background: var(--accent-blue);
+            width: 40px;
+            border-radius: 5px;
+        }
+        .bar-1 { height: 40%; }
+        .bar-2 { height: 80%; background: var(--accent-pink); }
+        .bar-3 { height: 60%; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .viral-badge {
+            background: rgba(255, 0, 80, 0.1);
+            color: var(--accent-pink);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 0, 80, 0.2);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-container { flex-direction: column; text-align: center; }
+            .hero-subtitle { margin: 0 auto 3rem; }
+            .hero-visual { display: none; }
+            .hero-title { font-size: 3.5rem; }
+        }
+    </style>
+
+    <script>
+        // Check for existing connection
+        document.addEventListener('DOMContentLoaded', () => {
+            const hasToken = sessionStorage.getItem('tiktok_access_token') || localStorage.getItem('tiktokHandle');
+            if (!hasToken) {
+                const warning = document.getElementById('connection-warning');
+                warning.style.display = 'block';
+                // Adjust nav padding to accommodate banner
+                document.querySelector('.landing-nav').style.paddingTop = '4rem';
+            }
+        });
+    </script>
+</body>
+</html>

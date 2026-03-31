@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorize CreatorAI — TikTok</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tiktok-black: #121212;
+            --tiktok-pink: #fe2c55;
+            --tiktok-blue: #25f4ee;
+            --tiktok-white: #ffffff;
+            --tiktok-gray: #f1f1f2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--tiktok-white);
+            color: var(--tiktok-black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .tiktok-logo {
+            width: 120px;
+            margin-bottom: 30px;
+        }
+
+        .auth-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .auth-subtitle {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .qr-section {
+            background: #fafafa;
+            border: 1.5px dashed #ccc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .qr-section:hover {
+            border-color: var(--tiktok-pink);
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: white;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            color: #eee;
+        }
+
+        .login-alternatives {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .input-tiktok {
+            width: 100%;
+            padding: 12px 16px;
+            background: #f1f1f2;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .input-tiktok:focus {
+            border-color: var(--tiktok-pink);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--tiktok-pink);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            filter: brightness(0.9);
+        }
+
+        .permissions-box {
+            text-align: left;
+            font-size: 12px;
+            color: #777;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        .perm-item {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check-circle {
+            color: #2eb82e;
+            font-size: 10px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1280px-TikTok_logo.svg.png"
+            alt="TikTok" class="tiktok-logo">
+
+        <h2 class="auth-title">Authorize CreatorAI</h2>
+        <p class="auth-subtitle">Log in to link your TikTok account to CreatorAI and share following permissions:</p>
+
+        <div class="qr-section">
+            <div class="qr-code">
+                <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <p style="margin-top: 10px; font-weight: 600; font-size: 0.9rem;">Log in with QR Code</p>
+        </div>
+
+        <div class="login-alternatives">
+            <p style="margin-bottom: 15px; color: #888; font-size: 0.8rem;">OR CONTINUE WITH USERNAME</p>
+            <input type="text" id="target-handle" class="input-tiktok" placeholder="TikTok Username (@example)">
+            <button class="auth-btn" onclick="simulateAuth()">Authorize & Login</button>
+        </div>
+
+        <div class="permissions-box">
+            <p style="font-weight: 700; margin-bottom: 8px;">PERMISSIONS:</p>
+            <div class="perm-item"><i class="fa-solid fa-circle-check check-circle"></i> Access public profile metrics
+            </div>
+            <div class="perm-item"><i class="fa-solid fa-circle-check check-circle"></i> View video performance
+                analytics</div>
+            <div class="perm-item"><i class="fa-solid fa-circle-check check-circle"></i> Analyze audience retention
+                history</div>
+        </div>
+
+        <a href="index.html" class="back-link">Cancel and go back</a>
+    </div>
+
+    <script>
+        function simulateAuth() {
+            const handle = document.getElementById('target-handle').value.trim();
+            if (!handle) {
+                alert('Official TikTok Auth: Please enter your username.');
+                return;
+            }
+
+            // Save for the app to pick up
+            localStorage.setItem('tiktokHandle', handle.replace('@', ''));
+
+            // Animation
+            const btn = document.querySelector('.auth-btn');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
+            btn.style.opacity = '0.7';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1200);
+        }
+    </script>
+</body>
+
+</html>

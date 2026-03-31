@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok AI Creator Assistant</title>
+    <!-- Google Fonts: Clash Display, Inter -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="dark-theme">
+
+    <!-- Background Decoration -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar glass-panel">
+            <div class="sidebar-header">
+                <i class="fa-brands fa-tiktok neon-glow"></i>
+                <span class="logo-text">Creator<span class="text-accent">AI</span></span>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="nav-item active" data-section="dashboard">
+                    <a href="#"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+                </li>
+                <li class="nav-item" data-section="ai-strategies">
+                    <a href="#"><i class="fa-solid fa-robot"></i> AI Strategies</a>
+                </li>
+                <li class="nav-item" data-section="trend-radar">
+                    <a href="#"><i class="fa-solid fa-fire-flame-curved"></i> Trend Radar</a>
+                </li>
+                <li class="nav-item" data-section="hook-analysis">
+                    <a href="#"><i class="fa-solid fa-magnifying-glass-chart"></i> Hook Analysis</a>
+                </li>
+                <li class="nav-item" data-section="settings">
+                    <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="account-profile">
+                    <img src="https://ui-avatars.com/api/?name=W&background=3b82f6&color=fff" alt="User" class="profile-pic">
+                    <div class="profile-info">
+                        <span class="profile-name">@winsestar</span>
+                        <span class="profile-niche">Tech / Coding</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard Section -->
+            <div id="section-dashboard" class="content-section active">
+                <header class="top-header">
+                    <div>
+                        <h1 class="page-title">Overview</h1>
+                        <p class="page-subtitle">Your AI-driven TikTok insights for the last 7 days.</p>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <button class="btn btn-outline" id="sync-btn" onclick="syncTikTokData()"><i class="fa-solid fa-arrows-rotate"></i> Sync Data</button>
+                    </div>
+                </header>
+
+                <section class="kpi-grid">
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="kpi-content">
+                            <span class="kpi-label">Followers</span>
+                            <h2 class="kpi-value" id="kpi-followers">Analyzing...</h2>
+                        </div>
+                    </div>
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-icon accent"><i class="fa-solid fa-heart"></i></div>
+                        <div class="kpi-content">
+                            <span class="kpi-label">Total Likes</span>
+                            <h2 class="kpi-value" id="kpi-likes">Analyzing...</h2>
+                        </div>
+                    </div>
+                    <div class="kpi-card glass-panel">
+                        <div class="kpi-icon secondary"><i class="fa-solid fa-video"></i></div>
+                        <div class="kpi-content">
+                            <span class="kpi-label">Total Videos</span>
+                            <h2 class="kpi-value" id="kpi-videos">Analyzing...</h2>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="dashboard-grid">
+                    <div class="chart-container glass-panel span-2-cols">
+                        <div class="panel-header"><h3>Performance Timeline</h3></div>
+                        <div class="chart-wrapper"><canvas id="performanceChart"></canvas></div>
+                    </div>
+
+                    <div class="ai-insight-panel glass-panel neon-border">
+                        <div class="panel-header"><h3><i class="fa-solid fa-bolt neon-glow"></i> AI Action Plan</h3></div>
+                        <div class="insight-list">
+                            <div class="insight-item">
+                                <div class="insight-icon alert"><i class="fa-regular fa-clock"></i></div>
+                                <div class="insight-text">
+                                    <h4>Optimal Posting Time</h4>
+                                    <p>Post today at <strong>19:45 PM</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="retention-panel glass-panel">
+                        <div class="panel-header">
+                            <h3>Retention Rate Prediction</h3>
+                            <button class="btn btn-primary btn-small">Analyze Draft</button>
+                        </div>
+                        <div class="video-analysis-mockup">
+                            <div class="video-thumbnail"><i class="fa-solid fa-video"></i> <span>Recent Upload</span></div>
+                            <div class="retention-bar-container">
+                                <div class="retention-bar">
+                                    <div class="retention-fill" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Strategies Section -->
+            <div id="section-ai-strategies" class="content-section">
+                <header class="top-header">
+                    <div>
+                        <h1 class="page-title">AI Strategies</h1>
+                        <p class="page-subtitle">Personalized roadmap to reach Virality.</p>
+                    </div>
+                </header>
+                <div class="glass-panel" style="padding: 2rem; margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-brain" style="color: var(--accent-purple);"></i> Generation Engine</h3>
+                    <p style="color: var(--text-secondary);">AI is currently processing your last 20 videos to generate a growth roadmap. This may take a few minutes.</p>
+                    <div class="loading-bar-full" style="height: 4px; background: rgba(255,255,255,0.1); margin-top: 1.5rem; border-radius: 2px; overflow: hidden;">
+                        <div style="width: 65%; height: 100%; background: var(--accent-purple); animation: pulse 2s infinite;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trend Radar Section -->
+            <div id="section-trend-radar" class="content-section">
+                <header class="top-header">
+                    <div>
+                        <h1 class="page-title">Trend Radar</h1>
+                        <p class="page-subtitle">Real-time trending music and hashtags.</p>
+                    </div>
+                </header>
+                <div class="dashboard-grid" style="margin-top: 2rem;">
+                    <div class="glass-panel" style="padding: 1.5rem;">
+                        <h3>Trending Sounds</h3>
+                        <ul class="trend-list">
+                            <li class="trend-item">
+                                <div class="trend-rank">#1</div>
+                                <div class="trend-info"><h4>Cyberpunk Dreams</h4><span>32k uses / hr</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glass-panel" style="padding: 1.5rem;">
+                        <h3>Viral Hashtags</h3>
+                        <ul class="trend-list">
+                            <li class="trend-item">
+                                <div class="trend-rank">#1</div>
+                                <div class="trend-info"><h4>#AIRevolution</h4><span>1.2B views</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hook Analysis Section -->
+            <div id="section-hook-analysis" class="content-section">
+                <header class="top-header">
+                    <div>
+                        <h1 class="page-title">Hook Analysis</h1>
+                        <p class="page-subtitle">Optimize the first 3 seconds of your videos.</p>
+                    </div>
+                </header>
+                <div class="glass-panel" style="padding: 3rem; text-align: center; margin-top: 2rem;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 1rem;"></i>
+                    <h2>Drag & Drop your video</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Upload your draft and AI will predict the Retention Rate.</p>
+                    <button class="btn btn-primary">Select File</button>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="section-settings" class="content-section">
+                <header class="top-header">
+                    <div>
+                        <h1 class="page-title">Settings</h1>
+                        <p class="page-subtitle">Personalize your CreatorAI experience.</p>
+                    </div>
+                </header>
+                
+                <div class="dashboard-grid" style="margin-top: 2rem;">
+                    <div class="glass-panel" style="padding: 2rem;">
+                        <h3>Display & Interface</h3>
+                        <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Dark Mode</span>
+                                <button id="theme-toggle" class="btn btn-outline btn-small">Enabled</button>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>Language</span>
+                                <select id="lang-select" class="custom-select">
+                                    <option value="en">English (US)</option>
+                                    <option value="tr">Türkçe (TR)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-panel" style="padding: 2rem;">
+                        <h3>Account & Safety</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Connected TikTok: <strong id="settings-handle" class="text-accent">@...</strong></p>
+                        <button class="btn btn-outline btn-small" style="margin-top: 1rem; color: var(--accent-pink);" onclick="localStorage.clear(); window.location.href='index.html';">Disconnect Profile</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Script that powers the charts & logic -->
+    <script src="scripts/app.js"></script>
+    <script>
+        // Tab Switching Logic
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.content-section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSectionId = item.getAttribute('data-section');
+                
+                // Update navigation
+                navItems.forEach(n => n.classList.remove('active'));
+                item.classList.add('active');
+
+                // Update content
+                sections.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(`section-${targetSectionId}`).classList.add('active');
+            });
+        });
+
+        // Number formatter
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num;
+        }
+
+        // 1. Check for Redirected OAuth Data from our Server
+        const urlParams = new URLSearchParams(window.location.search);
+        const authDataEncoded = urlParams.get('data');
+        const authToken = urlParams.get('token');
+
+        if (authToken) sessionStorage.setItem('tiktok_access_token', authToken);
+
+        if (authDataEncoded) {
+            try {
+                const userData = JSON.parse(atob(authDataEncoded));
+                console.log("Official TikTok Profile Connected:", userData);
+                
+                // Populate Profile from Official API
+                document.querySelector('.profile-name').innerHTML = `${userData.display_name} <i class="fa-solid fa-circle-check" style="color:var(--accent-blue);font-size:0.8rem;"></i>`;
+                if(userData.avatar_url) document.querySelector('.profile-pic').src = userData.avatar_url;
+                
+                // Update handle in settings
+                const settingsHandle = document.getElementById('settings-handle');
+                if(settingsHandle) settingsHandle.innerHTML = `<span class="badge viral-badge">Authorized: ${userData.display_name}</span>`;
+
+                // Auto-sync if token is present
+                setTimeout(() => syncTikTokData(), 1000);
+
+            } catch (e) { console.error("Error decoding TikTok data", e); }
+        }
+
+        async function syncTikTokData() {
+            const token = sessionStorage.getItem('tiktok_access_token');
+            if (!token) return alert('Please log in with TikTok first to sync official data.');
+
+            const btn = document.getElementById('sync-btn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Syncing...';
+            
+            try {
+                // Check server health first
+                const healthCheck = await fetch('/health').catch(() => ({ ok: false }));
+                if (!healthCheck.ok) {
+                    throw new Error('Backend server (server.js) is not reachable.');
+                }
+
+                const response = await fetch(`/api/tiktok/data?token=${token}`);
+                if (!response.ok) {
+                    const errData = await response.json();
+                    throw new Error(errData.message || `HTTP error ${response.status}`);
+                }
+                
+                const data = await response.json();
+
+                if (data.success) {
+                    // Update KPIs
+                    document.getElementById('kpi-followers').textContent = formatNumber(data.stats.follower_count || 0);
+                    document.getElementById('kpi-likes').textContent = formatNumber(data.stats.heart_count || 0);
+                    document.getElementById('kpi-videos').textContent = formatNumber(data.stats.video_count || 0);
+
+                    // Update Chart
+                    if (data.videos && data.videos.length > 0 && window.performanceChart) {
+                        const videoLabels = data.videos.map((_, i) => `Vid ${i+1}`);
+                        const videoViews = data.videos.map(v => v.view_count || 0);
+                        
+                        window.performanceChart.data.labels = videoLabels;
+                        window.performanceChart.data.datasets[0].data = videoViews;
+                        window.performanceChart.update();
+                    }
+                    
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Updated';
+                    setTimeout(() => { btn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Sync Data'; }, 3000);
+                } else {
+                    throw new Error(data.message || 'Sync failed');
+                }
+            } catch (err) {
+                console.error('Sync Error:', err);
+                btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error';
+                alert('⚠️ Sync Error: ' + err.message + '\n\nMake sure server.js is running and your token is valid.');
+            }
+        }
+
+        // 2. Existing Public Scraper Logic (as fallback or for public stats)
+        const savedHandle = localStorage.getItem('tiktokHandle');
+        if (savedHandle) {
+            document.getElementById('settings-handle').textContent = '@' + savedHandle;
+            // Fetch real data from our local Server!
+            fetch(`/api/user/${savedHandle}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update the profile name in the UI to their REAL nickname
+                        document.querySelector('.profile-name').innerHTML = `${data.nickname || data.user.nickname} <span style="font-size:0.75em;color:var(--text-secondary)">@${data.user.uniqueId}</span>`;
+                        
+                        // Try to load real avatar, fallback to generated
+                        document.querySelector('.profile-pic').src = data.user.avatarMedium || `https://ui-avatars.com/api/?name=${data.user.uniqueId}&background=00f2fe&color=fff&rounded=true&bold=true`;
+                        
+                        // Update KPIs with real stats
+                        const followers = data.stats.followerCount;
+                        const likes = data.stats.heartCount;
+                        document.getElementById('kpi-followers').textContent = formatNumber(followers);
+                        document.getElementById('kpi-likes').textContent = formatNumber(likes);
+                        document.getElementById('kpi-videos').textContent = formatNumber(data.stats.videoCount);
+
+                        // --- CHART UPDATE WITH REAL VIDEO DATA ---
+                        if (data.videos && data.videos.length > 0) {
+                            // Extract labels and views for the last videos
+                            const recentVideos = data.videos.slice(0, 10).reverse();
+                            const videoLabels = recentVideos.map((_, i) => `Video ${i+1}`);
+                            const videoViews = recentVideos.map(v => v.views);
+
+                            // You can potentially reload the chart or update it. 
+                            // Since Chart is declared in app.js, we should make it available globally or re-init.
+                            if (window.performanceChart) {
+                                window.performanceChart.data.labels = videoLabels;
+                                window.performanceChart.data.datasets[0].data = videoViews;
+                                window.performanceChart.data.datasets[0].label = 'Real Performance (Views)';
+                                window.performanceChart.update();
+                            }
+                        }
+
+                        // --- ADVANCED AI LOGIC ENGINE ---
+                        const insightList = document.querySelector('.insight-list');
+                        insightList.innerHTML = ''; // Clear defaults
+
+                        // Logic 1: Recent Performance Analysis (Real trend)
+                        if (data.videos && data.videos.length >= 2) {
+                            const lastTwo = data.videos.slice(0, 2);
+                            const percentChange = ((lastTwo[0].views - lastTwo[1].views) / (lastTwo[1].views || 1)) * 100;
+                            
+                            if (percentChange < -20) {
+                                insightList.innerHTML += `
+                                    <div class="insight-item">
+                                        <div class="insight-icon alert"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                                        <div class="insight-text">
+                                            <h4>Performance Drop Alert</h4>
+                                            <p>Your last video performed <strong>${Math.abs(percentChange).toFixed(1)}%</strong> worse than the one before. AI suggests changing the <strong>visual lighting</strong> setup.</p>
+                                        </div>
+                                    </div>`;
+                            } else if (percentChange > 20) {
+                                insightList.innerHTML += `
+                                    <div class="insight-item">
+                                        <div class="insight-icon success"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                                        <div class="insight-text">
+                                            <h4>Viral Pattern Found</h4>
+                                            <p>Performance up by <strong>${percentChange.toFixed(1)}%</strong>! Your usage of <strong>overlay text</strong> in the first 2s is working. Keep that format.</p>
+                                        </div>
+                                    </div>`;
+                            }
+                        }
+
+                        // Logic 2: Engagement Ratio Analysis
+                        const engagementRatio = (likes / (followers || 1)).toFixed(2);
+                        if (engagementRatio < 5) {
+                            insightList.innerHTML += `
+                                <div class="insight-item">
+                                    <div class="insight-icon alert"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                    <div class="insight-text">
+                                        <h4>Engagement Deficit Detected</h4>
+                                        <p>Your Like/Follower ratio is ${engagementRatio}. AI suggests prioritizing <strong>Direct-to-Camera</strong> speaking videos to build trust.</p>
+                                    </div>
+                                </div>`;
+                        }
+
+                        // Logic 3: Niche Content Detection (Deep Analysis)
+                        const descriptions = data.videos.map(v => v.desc.toLowerCase()).join(' ');
+                        const niches = {
+                            tech: ['coding', 'tech', 'ai', 'ai tools', 'software', 'programming', 'javascript', 'python', 'developer', 'asistan'],
+                            comedy: ['funny', 'humor', 'comedy', 'meme', 'joke', 'pardon', 'latife', 'komik'],
+                            food: ['recipe', 'food', 'cooking', 'yemek', 'tarif', 'lezzet', 'makarna', 'tatlı'],
+                            fitness: ['workout', 'gym', 'fitness', 'spor', 'training', 'muscle', 'bodybuilding'],
+                            lifestyle: ['vlog', 'daily', 'routine', 'shopping', 'hayat', 'gunluk']
+                        };
+
+                        let detectedNiche = "General Content";
+                        let nicheStyle = "blue";
+                        let nicheAdvice = "Your content is varied. AI suggests picking <strong>one specific niche</strong> to boost the algorithm's understanding.";
+                        let bestHours = "18:00 - 20:00";
+
+                        for (const [key, keywords] of Object.entries(niches)) {
+                            if (keywords.some(word => descriptions.includes(word))) {
+                                detectedNiche = key.charAt(0).toUpperCase() + key.slice(1);
+                                if (key === 'tech') {
+                                    nicheStyle = "var(--accent-blue)";
+                                    nicheAdvice = "AI detects you are a <strong>Tech Creator</strong>. Your audience values <strong>efficiency and hacks</strong>. Use split-screen tutorials.";
+                                    bestHours = "20:00 - 22:30";
+                                } else if (key === 'comedy') {
+                                    nicheStyle = "var(--accent-pink)";
+                                    nicheAdvice = "AI detects <strong>Entertainment/Comedy</strong>. High energy and <strong>relatable captions</strong> are your best hooks.";
+                                    bestHours = "13:00 - 15:00 (Break hours)";
+                                } else if (key === 'food') {
+                                    nicheStyle = "#10b981";
+                                    nicheAdvice = "AI detects <strong>Culinary Content</strong>. Satisfying <strong>ASMR sounds</strong> increase your share-rate by 40%.";
+                                    bestHours = "17:00 - 19:00 (Before dinner)";
+                                }
+                                break;
+                            }
+                        }
+
+                        // Add Niche Insight Card
+                        insightList.innerHTML += `
+                            <div class="insight-item" style="border-left: 3px solid ${nicheStyle}">
+                                <div class="insight-icon" style="background: ${nicheStyle}22; color: ${nicheStyle}"><i class="fa-solid fa-tags"></i></div>
+                                <div class="insight-text">
+                                    <h4>Niche Detected: ${detectedNiche}</h4>
+                                    <p>${nicheAdvice}</p>
+                                </div>
+                            </div>`;
+
+                        // Logic 4: Dynamic Posting Schedule
+                        insightList.innerHTML += `
+                            <div class="insight-item">
+                                <div class="insight-icon alert"><i class="fa-regular fa-clock"></i></div>
+                                <div class="insight-text">
+                                    <h4>Dynamic Posting Schedule</h4>
+                                    <p>Based on @${data.user.uniqueId}'s niche history, best time to drop a video is <strong>${bestHours}</strong>.</p>
+                                </div>
+                            </div>`;
+
+                    } else {
+                        throw new Error(data.message || 'Gizli Profil / Bulunamadı');
+                    }
+                })
+                .catch(err => {
+                    console.error('Fetch error:', err);
+                    document.getElementById('kpi-followers').textContent = 'Error';
+                    document.getElementById('kpi-likes').textContent = 'Error';
+                    document.getElementById('kpi-videos').textContent = 'Error';
+                });
+        }
+
+        // Theme Toggle Handler
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isDark = !document.body.classList.contains('light-theme');
+            themeBtn.textContent = isDark ? 'Enabled' : 'Disabled';
+            if(!isDark) {
+                document.body.style.backgroundColor = '#f4f7f6';
+                document.body.style.color = '#333';
+            } else {
+                document.body.style.backgroundColor = '';
+                document.body.style.color = '';
+            }
+        });
+
+        // Language Selector Placeholder
+        document.getElementById('lang-select').addEventListener('change', (e) => {
+            if(e.target.value === 'tr') {
+                alert('Türkçe dili aktif ediliyor... (Tüm arayüz metinleri TR şablonuna çevrilecek)');
+                // Translation logic could go here
+            }
+        });
+    </script>
+</body>
+</html>
